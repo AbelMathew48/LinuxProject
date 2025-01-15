@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linux Command Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* Space between header and footer */
+            align-items: center;
+            min-height: 100vh; /* Ensure full height */
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #1e1e1e;
+            color: #fff;
+            padding: 1rem;
+            width: 100%;
+            text-align: center;
+            font-size: 2rem;
+        }
+
+        footer {
+            background-color: #1e1e1e;
+            color: #fff;
+            padding: 1rem;
+            text-align: center;
+            width: 100%;
+            position: relative; /* Adjust the footer to its natural position */
+        }
+
+        .quiz-container {
+            background-color: #1e1e1e;
+            border: 3px solid #007bff; /* Blue border around the box */
+            border-radius: 10px;
+            padding: 2rem 3rem; /* Add padding inside the box */
+            width: 600px; /* Define fixed width */
+            max-height: 600px; /* Define fixed height with max-height */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow-y: auto;
+            margin-top: 50px; /* Add some space between header and box */
+        }
+
+        .question {
+            font-size: 1.5rem; /* Larger text size */
+            margin-bottom: 1.5rem;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem; /* Increased gap between options */
+        }
+
+        .option {
+            background-color: #2e2e2e;
+            padding: 0.75rem; /* Increased padding */
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 1.2rem; /* Increased font size */
+        }
+
+        .option:hover {
+            background-color: #444;
+        }
+
+        .option.correct {
+            background-color: #28a745;
+            box-shadow: 0 0 5px rgba(0, 255, 0, 0.7);
+        }
+
+        .option.wrong {
+            background-color: #dc3545;
+            box-shadow: 0 0 5px rgba(255, 0, 0, 0.7);
+        }
+
+        .button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 1.5rem;
+            font-size: 1.2rem; /* Increased font size */
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+        }
+
+        .final-score {
+            margin-top: 1.5rem;
+            font-size: 1.8rem; /* Larger font size for score */
+            text-align: center;
+        }
+
+        .home-button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 1.5rem;
+        }
+
+        .home-button:hover {
+            background-color: #0056b3;
+        }
+
+        .question-number {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        Linux Command Quiz
+    </header>
+
+    <div class="quiz-container">
+        <div id="question-container">
+            <p id="question" class="question"></p>
+            <p id="question-number" class="question-number"></p>
+            <div class="options">
+                <button class="option" onclick="selectOption(0)"></button>
+                <button class="option" onclick="selectOption(1)"></button>
+                <button class="option" onclick="selectOption(2)"></button>
+            </div>
+            <button id="next-button" class="button" onclick="nextQuestion()" style="display: none;">Next</button>
+        </div>
+        <div id="score-container" class="final-score" style="display: none;">
+            <p>Your score: <span id="score"></span> / 15</p>
+            <a href="Linux.html" class="home-button">Go to Home</a> <!-- Home button -->
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2025 Linux Command Quiz. All Rights Reserved.
+    </footer>
+
+    <script>
+        const questions = [
+            {
+                question: "What does the 'ls' command do?",
+                options: ["List files and directories", "Change directory", "Print working directory"],
+                correct: 0
+            },
+            {
+                question: "What does the 'cd' command do?",
+                options: ["Copy files", "Change directory", "Remove directory"],
+                correct: 1
+            },
+            {
+                question: "What does the 'pwd' command do?",
+                options: ["List files", "Change directory", "Print working directory"],
+                correct: 2
+            },
+            {
+                question: "What does the 'mkdir' command do?",
+                options: ["Create a new directory", "Remove a directory", "List files"],
+                correct: 0
+            },
+            {
+                question: "What does the 'rmdir' command do?",
+                options: ["Remove a directory", "Rename a directory", "Change directory"],
+                correct: 0
+            },
+            {
+                question: "What does the 'cp' command do?",
+                options: ["Copy files or directories", "Move files", "Create files"],
+                correct: 0
+            },
+            {
+                question: "What does the 'mv' command do?",
+                options: ["Copy files", "Move files or directories", "Remove files"],
+                correct: 1
+            },
+            {
+                question: "What does the 'cat' command do?",
+                options: ["Create files", "Concatenate and display file content", "Remove files"],
+                correct: 1
+            },
+            {
+                question: "What does the 'touch' command do?",
+                options: ["Change file permissions", "Create a new empty file", "View file content"],
+                correct: 1
+            },
+            {
+                question: "What does the 'grep' command do?",
+                options: ["Search text patterns in files", "Create a directory", "Remove a file"],
+                correct: 0
+            },
+            {
+                question: "Which command is used to list all files and directories in a directory?",
+                options: ["ls", "pwd", "cd"],
+                correct: 0
+            },
+            {
+                question: "Which command is used to change the current directory?",
+                options: ["cd", "ls", "mkdir"],
+                correct: 0
+            },
+            {
+                question: "Which command is used to create a new file?",
+                options: ["touch", "cp", "mv"],
+                correct: 0
+            },
+            {
+                question: "Which command removes a directory?",
+                options: ["rmdir", "rm", "mv"],
+                correct: 0
+            },
+            {
+                question: "Which command shows the current working directory?",
+                options: ["pwd", "cd", "ls"],
+                correct: 0
+            }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+
+        function displayQuestion() {
+            const questionData = questions[currentQuestion];
+            document.getElementById("question").textContent = questionData.question;
+            document.getElementById("question-number").textContent = `Question ${currentQuestion + 1}`;
+            const options = document.querySelectorAll(".option");
+            options.forEach((option, index) => {
+                option.textContent = questionData.options[index];
+                option.classList.remove("correct", "wrong");
+                option.disabled = false; // Enable options before each question
+            });
+            document.getElementById("next-button").style.display = "none"; // Hide the next button initially
+        }
+
+        function selectOption(index) {
+            const options = document.querySelectorAll(".option");
+            const questionData = questions[currentQuestion];
+
+            if (index === questionData.correct) {
+                score++;
+                options[index].classList.add("correct");
+            } else {
+                options[index].classList.add("wrong");
+                options[questionData.correct].classList.add("correct"); // Show correct answer
+            }
+
+            options.forEach(option => option.disabled = true); // Disable all options after selection
+            document.getElementById("next-button").style.display = "inline-block"; // Show the next button
+        }
+
+        function nextQuestion() {
+            currentQuestion++;
+            if (currentQuestion < questions.length) {
+                displayQuestion();
+            } else {
+                showScore();
+            }
+        }
+
+        function showScore() {
+            document.getElementById("question-container").style.display = "none";
+            document.getElementById("score-container").style.display = "block";
+            document.getElementById("score").textContent = score;
+        }
+
+        // Initialize the quiz
+        displayQuestion();
+    </script>
+</body>
+</html>
