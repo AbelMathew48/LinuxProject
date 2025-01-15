@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linux Commands Showcase</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to the external CSS file -->
+    <style>
+        /* Glowing text effect */
+        .glow {
+            font-family: 'Arial', sans-serif;
+            font-size: 2rem;
+            font-weight: bold;
+            color: #00FFFF;
+            animation: glow-animation 1.5s ease-in-out infinite alternate;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+            text-align: center;
+            transition: all 0.3s ease-in-out;
+        }
+
+        @keyframes glow-animation {
+            0% {
+                text-shadow: 0 0 10px rgba(0, 255, 255, 1), 0 0 20px rgba(0, 255, 255, 1), 0 0 30px rgba(0, 255, 255, 1);
+            }
+
+            100% {
+                text-shadow: 0 0 20px rgba(0, 255, 255, 1), 0 0 30px rgba(0, 255, 255, 1), 0 0 40px rgba(0, 255, 255, 1);
+            }
+        }
+
+        /* Increase font size and add transparency to the box */
+        #commandOfTheDay {
+            font-size: 2.5rem;
+            font-family: 'Courier New', Courier, monospace;
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.7);
+            margin: 20px;
+            text-align: center;
+        }
+
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Linux Commands Showcase</h1>
+        <nav>
+            <a href="#home" onclick="navigateToHome()">Home</a>
+            <a href="#commands" onclick="navigateTo('commands')">Commands</a>
+            <a href="#guides" onclick="navigateToGuide()">Guides</a> <!-- Open PDF Guide -->
+            <a href="#quiz" onclick="navigateToQuiz()">Quiz</a> <!-- Open Quiz Page -->
+        </nav>
+    </header>
+
+    <div id="home" class="hero">
+        <div class="hero-text">
+            <h2>Learn Linux Commands</h2>
+            <p>Master the command line in minutes with our comprehensive guide to Linux commands.</p>
+            <input type="text" id="searchBar" placeholder="Search commands..." onkeydown="checkEnter(event)">
+            <button onclick="searchCommands()">Go</button>
+        </div>
+        <img src="Linux.png" alt="Linux Commands Illustration">
+    </div>
+
+    <section id="commands" class="section">
+        <h3>File and Directory Manipulation Commands</h3>
+        <div id="command-section">
+        <div class="commands-grid">
+            <div class="command-card" onclick="navigateToPage('ls.html')">
+                <h4>ls</h4>
+            </div>
+            <div class="command-card" onclick="navigateToPage('cd.html')">
+                <h4>cd</h4>
+            </div>
+            <div class="command-card" onclick="navigateToPage('pwd.html')">
+                <h4>pwd</h4>
+            </div>
+            <div class="command-card" onclick="navigateToPage('mkdir.html')">
+                <h4>mkdir</h4>
+            </div>
+            <div class="command-card" onclick="navigateToPage('rmdir.html')">
+                <h4>rmdir/rm</h4>
+            </div>
+            <div class="command-card" onclick="navigateToPage('cp.html')">
+                <h4>cp</h4>
+            </div>
+            <div class="command-card" onclick="navigateToPage('mv.html')">
+                <h4>mv</h4>
+            </div>
+            <div class="command-card" onclick="navigateToPage('cat.html')">
+                <h4>cat</h4>
+            </div>
+            <div class="command-card" onclick="navigateToPage('touch.html')">
+                <h4>touch</h4>
+            </div>
+            <div class="command-card" onclick="navigateToPage('grep.html')">
+                <h4>grep</h4>
+            </div>
+        </div>
+</div>
+    </section>
+
+    <section id="guides" class="section">
+        <h3>Command of the Day</h3>
+        <p id="commandOfTheDay" class="glow">Loading...</p>
+    </section>
+
+    <section id="examples" class="section">
+        <h3>New to the Command Line?</h3>
+        <div class="commands-grid">
+            <div class="command-card" onclick="navigateToPage('ls.pdf')">
+                <h4>ls</h4>
+                <p>List Files and Directories</p>
+            </div>
+            <div class="command-card" onclick="navigateToPage('cd.pdf')">
+                <h4>cd</h4>
+                <p>Change Current Directory</p>
+            </div>
+            <div class="command-card" onclick="navigateToPage('pwd.pdf')">
+                <h4>pwd</h4>
+                <p>Print Working Directory</p>
+            </div>
+            <div class="command-card" onclick="navigateToPage('mkdir.pdf')">
+                <h4>mkdir</h4>
+                <p>Creating a File</p>
+            </div>
+            <div class="command-card" onclick="navigateToPage('rmdir.pdf')">
+                <h4>rmdir/rm</h4>
+                <p>Delete or Remove a File</p>
+            </div>
+            <div class="command-card" onclick="navigateToPage('cp.pdf')">
+                <h4>cp</h4>
+                <p>Create a Copy of File</p>
+            </div>
+            <div class="command-card" onclick="navigateToPage('mv.pdf')">
+                <h4>mv</h4>
+                <p>Move Files and Directories</p>
+            </div>
+            <div class="command-card" onclick="navigateToPage('cat.pdf')">
+                <h4>cat</h4>
+                <p>Display content of File</p>
+            </div>
+            <div class="command-card" onclick="navigateToPage('touch.pdf')">
+                <h4>touch</h4>
+                <p>Create a new File</p>
+            </div>
+            <div class="command-card" onclick="navigateToPage('grep.pdf')">
+                <h4>grep</h4>
+                <p>Searching and Manipulating Text patterns within Files</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Abel Mathew. All rights reserved.</p>
+    </footer>
+
+   <script>
+    // Function to change the command of the day every 24 hours
+    const commandsOfTheDay = [
+        { name: "ls", description: "List all files and directories in the current directory." },
+        { name: "cd", description: "Change the current directory." },
+        { name: "pwd", description: "Print the current working directory." },
+        { name: "mkdir", description: "Create a new directory." },
+        { name: "rmdir", description: "Remove an empty directory." },
+        { name: "cp", description: "Copy files or directories from one location to another." },
+        { name: "mv", description: "Move or rename files or directories." },
+        { name: "cat", description: "Concatenate and display the content of files." },
+        { name: "touch", description: "Create a new empty file or update the timestamp of an existing file." },
+        { name: "grep", description: "Search for a pattern within files." }
+    ];
+
+    // Get today's date and calculate which command to show
+    function getCommandOfTheDay() {
+        const today = new Date();
+        const index = today.getDate() % commandsOfTheDay.length;
+        const command = commandsOfTheDay[index];
+        return command;
+    }
+
+    function updateCommandOfTheDay() {
+        const command = getCommandOfTheDay();
+        const commandElement = document.getElementById("commandOfTheDay");
+        commandElement.innerHTML = `<strong>${command.name}</strong>: ${command.description}`;
+    }
+
+    // Update command of the day on page load
+    updateCommandOfTheDay();
+
+    // Function to scroll to different sections
+    function navigateTo(sectionId) {
+        document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function searchCommands() {
+        const query = document.getElementById('searchBar').value.toLowerCase();
+        const commands = document.querySelectorAll('.command-card h4');
+
+        commands.forEach((command) => {
+            const card = command.parentElement;
+            if (command.textContent.toLowerCase().includes(query)) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+
+    // Add an event listener to handle the Enter key
+    function checkEnter(event) {
+        if (event.key === "Enter") {
+            searchCommands(); // Trigger the searchCommands function when Enter is pressed
+        }
+    }
+
+    function navigateToPage(page) {
+        window.location.href = page + "#page=1";
+    }
+
+    // Function to open the PDF Guide when the Guides link is clicked
+    function navigateToGuide() {
+        window.open('guide.pdf', '_blank'); // Open the PDF in a new tab
+    }
+
+    // Function to navigate to the quiz page
+    function navigateToQuiz() {
+        window.location.href = 'quiz.html'; // Replace 'quiz.html' with the actual quiz webpage path
+    }
+
+    // New function to navigate back to home and reset the search
+    function navigateToHome() {
+        document.getElementById('searchBar').value = ''; // Clear the search bar
+        const commands = document.querySelectorAll('.command-card');
+        commands.forEach((command) => {
+            command.style.display = 'block'; // Show all the command cards again
+        });
+        document.getElementById('home').scrollIntoView({ behavior: 'smooth' });
+    }
+</script>
+
+</body>
+
+</html>
